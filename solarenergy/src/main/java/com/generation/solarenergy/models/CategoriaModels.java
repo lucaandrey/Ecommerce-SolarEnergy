@@ -15,14 +15,22 @@ public class CategoriaModels {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @NotBlank(message = "O atributo eh obrigatorio")
-    @Size(min = 5, max = 255)
-    private String tipoUsuario;
-    
-    @NotBlank(message = "O atributo eh obrigatorio")
+   
+    @NotBlank(message = "O atributo é obrigatorio")
     @Size(min = 5, max = 255)
     private String tipoProduto;
+    
+    @NotBlank(message = "O atributo é obrigatorio")
+    @Size(min = 5, max = 255)
+    private String descricao;
+    
+    public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
 
     public Long getId() {
         return id;
@@ -30,14 +38,6 @@ public class CategoriaModels {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getTipoUsuario() {
-        return tipoUsuario;
-    }
-
-    public void setTipoUsuario(String tipoUsuario) {
-        this.tipoUsuario = tipoUsuario;
     }
 
     public String getTipoProduto() {
