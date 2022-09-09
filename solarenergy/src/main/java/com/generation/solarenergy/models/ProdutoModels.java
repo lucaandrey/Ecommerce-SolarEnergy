@@ -1,12 +1,17 @@
 package com.generation.solarenergy.models;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "tb_produtos")
@@ -39,6 +44,14 @@ public class ProdutoModels {
 	
 	@NotBlank
 	private String potencia;
+	
+	@ManyToOne
+	@JsonIgnoreProperties("produto")
+	private UsuarioModels usuario;
+	
+	@ManyToOne
+	@JsonIgnoreProperties("produto")
+	private CategoriaModels categoria;
 
 	public Long getId() {
 		return id;
@@ -103,6 +116,23 @@ public class ProdutoModels {
 	public void setPotencia(String potencia) {
 		this.potencia = potencia;
 	}
+
+	public UsuarioModels getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(UsuarioModels usuario) {
+		this.usuario = usuario;
+	}
+
+	public CategoriaModels getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(CategoriaModels categoria) {
+		this.categoria = categoria;
+	}
+	
 	
 	
 }
