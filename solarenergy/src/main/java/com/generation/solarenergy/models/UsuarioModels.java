@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
@@ -22,34 +23,32 @@ public class UsuarioModels {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@NotBlank
+	@NotBlank(message = "O Atributo Nome é Obrigatório!")
 	@Size(max = 255)
 	private String nome;
 	
-	@NotBlank
-	@Size(max = 255)
-	private String email;
+	@NotBlank(message = "O Atributo email é Obrigatório!")
+	@Email( message = "O Atributo Usuário deve ser um email válido!")
+	private String usuario;
 	
 	@NotBlank
-	@Size(max = 255)
+	@Size(max = 5000, message = "O link da foto não pode ser maior do que 5000 caracteres")
 	private String foto;
 	
-	@NotBlank
-	@Size(max = 255)
+	@NotBlank(message = "O Atributo Senha é Obrigatório!")
+	@Size(min = 8, message = "A Senha deve ter no mínimo 8 caracteres")
 	private String senha;
 	
-	@NotBlank
-	@Size(max = 20)
-	private String CPF;
+	@NotBlank(message = "O Atributo Senha é Obrigatório!")
+	@Size(min = 8, message = "O CPF deve conter 15 caracteres")
+	private String cpf;
 	
-	@NotBlank
-	@Size(max = 255)
+	@NotBlank(message = "O Atributo endereço é Obrigatório!")
 	private String endereco;
 	
 	@OneToMany(mappedBy ="usuario", cascade = CascadeType.ALL )
 	@JsonIgnoreProperties("produto")
-	private List<ProdutoModels> produto; 
-	
+	private List<ProdutoModels> produto;
 
 	public Long getId() {
 		return id;
@@ -67,12 +66,12 @@ public class UsuarioModels {
 		this.nome = nome;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getUsuario() {
+		return usuario;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
 	}
 
 	public String getFoto() {
@@ -91,12 +90,12 @@ public class UsuarioModels {
 		this.senha = senha;
 	}
 
-	public String getCPF() {
-		return CPF;
+	public String getCpf() {
+		return cpf;
 	}
 
-	public void setCPF(String cPF) {
-		CPF = cPF;
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
 	}
 
 	public String getEndereco() {
@@ -113,9 +112,8 @@ public class UsuarioModels {
 
 	public void setProduto(List<ProdutoModels> produto) {
 		this.produto = produto;
-	}
+	} 
+	
 
-	
-	
 	
 }

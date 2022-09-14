@@ -33,10 +33,10 @@ public class ProdutoModels {
 	@Size(min = 3, max = 100)
 	private String dimensao;
 	
-	@NotBlank
+	
 	private Double preco;
 	
-	@NotBlank
+	
 	private Integer quantidade;
 	
 	@NotBlank
