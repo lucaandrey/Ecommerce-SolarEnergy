@@ -10,5 +10,5 @@ import com.generation.solarenergy.models.ProdutoModels;
 @Repository
 public interface ProdutoRepository extends JpaRepository<ProdutoModels, Long>{
 	
-	public List<ProdutoModels> findAllByMarcaConteiningIgnoreCase (String marca);
+	public List<ProdutoModels> findAllByMarcaContainingIgnoreCase (String marca);
 }

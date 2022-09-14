@@ -10,5 +10,5 @@ import com.generation.solarenergy.models.UsuarioModels;
 
 @Repository
 public interface UsuarioRepository extends JpaRepository<UsuarioModels, Long>{
-	public List<UsuarioModels> findAllByNomeConteiningIgnoreCase (String nome);
+	public List<UsuarioModels> findAllByNomeContainingIgnoreCase (String nome);
 }	

@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.generation.solarenergy.models.ProdutoModels;
+import com.generation.solarenergy.repositories.CategoriaRepository;
 import com.generation.solarenergy.repositories.ProdutoRepository;
 
 @RestController
@@ -29,6 +30,9 @@ public class ProdutoController {
 	
 	@Autowired
 	private ProdutoRepository produtoRepository;
+	
+	@Autowired
+	CategoriaRepository categoriaRepository;
 	
 	@GetMapping
 	public ResponseEntity<List<ProdutoModels>> getAll() {
@@ -44,12 +48,17 @@ public class ProdutoController {
 	
 	@GetMapping("/marca/{marca}")
 	public ResponseEntity <List<ProdutoModels>> getByMarca(@PathVariable String marca) {
-		return ResponseEntity.ok(produtoRepository.findAllByMarcaConteiningIgnoreCase(marca));
+		return ResponseEntity.ok(produtoRepository.findAllByMarcaContainingIgnoreCase(marca));
 	}
 	
 	@PostMapping
 	public ResponseEntity<ProdutoModels> post(@RequestBody @Valid ProdutoModels produtoModels) {
-		return ResponseEntity.status(HttpStatus.CREATED).body(produtoRepository.save(produtoModels));
+//		return ResponseEntity.status(HttpStatus.CREATED).body(produtoRepository.save(produtoModels));
+		
+		if(categoriaRepository.existsById(produtoModels.getCategoria().getId()))
+			return ResponseEntity.status(HttpStatus.CREATED).body(produtoRepository.save(produtoModels));
+		return ResponseEntity.notFound().build();
+					
 	}
 	
 	@PutMapping

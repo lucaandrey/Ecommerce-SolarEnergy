@@ -8,6 +8,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,6 +25,7 @@ import com.generation.solarenergy.repositories.UsuarioRepository;
 
 @RequestMapping("/usuario")
 @RestController
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class UsuarioController {
 	
 	@Autowired
@@ -43,7 +45,7 @@ public class UsuarioController {
 	
 	@GetMapping("/nome/{nome}")
 	public ResponseEntity<List<UsuarioModels>> getByNome(@PathVariable String nome) {
-		return ResponseEntity.ok(usuarioRepository.findAllByNomeConteiningIgnoreCase(nome));
+		return ResponseEntity.ok(usuarioRepository.findAllByNomeContainingIgnoreCase(nome));
 	}
 	
 	@PostMapping 
