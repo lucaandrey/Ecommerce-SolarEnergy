@@ -49,6 +49,20 @@ public class UsuarioModels {
 	@OneToMany(mappedBy ="usuario", cascade = CascadeType.ALL )
 	@JsonIgnoreProperties("produto")
 	private List<ProdutoModels> produto;
+	
+	public UsuarioModels(Long id, String nome, String usuario,String senha, String foto, String cpf, String endereco) {
+		this.id = id;
+		this.nome = nome;
+		this.usuario = usuario;
+		this.senha = senha;
+		this.foto = foto;
+		this.cpf = cpf;
+		this.endereco = endereco;
+	}
+	
+	public UsuarioModels() {
+		
+	}
 
 	public Long getId() {
 		return id;

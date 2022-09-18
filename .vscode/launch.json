@@ -1,0 +1,14 @@
+{
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Spring Boot-SolarenergyApplication<solarenergy>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "mainClass": "com.generation.solarenergy.SolarenergyApplication",
+      "projectName": "solarenergy",
+      "args": "",
+      "envFile": "${workspaceFolder}/.env"
+    }
+  ]
+}
