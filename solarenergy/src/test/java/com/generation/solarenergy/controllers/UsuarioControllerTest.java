@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,24 +73,23 @@ public class UsuarioControllerTest {
 	}
 	
 	@Test
-	@DisplayName("Atualizar um Usuário")
 	public void updateUser() {
 
 		Optional<UsuarioModels> usuarioCadastrado = usuarioService.cadastrarUsuario(new UsuarioModels(0L, 
 			"Juliana Andrews", "juliana_andrews@email.com.br", "juliana123", "ajhofiafjasifaishfa","12345678912345", "sadasdasda21s1as4"));
 
-		UsuarioModels usuarioUpdate = new UsuarioModels(usuarioCadastrado.get().getId(), 
+		UsuarioModels updateUser = new UsuarioModels(usuarioCadastrado.get().getId(), 
 			"Juliana Andrews Ramos", "juliana_ramos@email.com.br", "juliana123" , "ajhofiafjasifaishfa","12345678912345", "sadasdasda21s1as4");
 		
-		HttpEntity<UsuarioModels> corpoRequisicao = new HttpEntity<UsuarioModels>(usuarioUpdate);
+		HttpEntity<UsuarioModels> bodyRequest = new HttpEntity<UsuarioModels>(updateUser);
 
-		ResponseEntity<UsuarioModels> corpoResposta = testRestTemplate
+		ResponseEntity<UsuarioModels> response = testRestTemplate
 			.withBasicAuth("admin@root.com", "adminroot")
-			.exchange("/usuarios/atualizar", HttpMethod.PUT, corpoRequisicao, UsuarioModels.class);
+			.exchange("/usuarios/atualizar", HttpMethod.PUT, bodyRequest, UsuarioModels.class);
 
-		assertEquals(HttpStatus.OK, corpoResposta.getStatusCode());
-		assertEquals(corpoRequisicao.getBody().getNome(), corpoResposta.getBody().getNome());
-		assertEquals(corpoRequisicao.getBody().getUsuario(), corpoResposta.getBody().getUsuario());
+		assertEquals(HttpStatus.OK, response.getStatusCode());
+		assertEquals(bodyRequest.getBody().getNome(), response.getBody().getNome());
+		assertEquals(bodyRequest.getBody().getUsuario(), response.getBody().getUsuario());
 	}
 	
 	@Test
@@ -103,11 +101,11 @@ public class UsuarioControllerTest {
 		usuarioService.cadastrarUsuario(new UsuarioModels(0L, 
 				"Clovis de Barros Filho", "professorclovis@email.com.br", "13465278", "randomrandom","12345678912345", "sadasdasda21s1as4"));
 
-		ResponseEntity<String> resposta = testRestTemplate
+		ResponseEntity<String> response = testRestTemplate
 		.withBasicAuth("admin@root.com", "adminroot")
 			.exchange("/usuarios/all", HttpMethod.GET, null, String.class);
 
-		assertEquals(HttpStatus.OK, resposta.getStatusCode());
+		assertEquals(HttpStatus.OK, response.getStatusCode());
 
 	}
 	

@@ -18,23 +18,32 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Table(name = "tb_categorias")
 public class CategoriaModels {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-   
-    @NotBlank(message = "O atributo é obrigatorio")
-    @Size(min = 5, max = 255)
-    private String tipoProduto;
-    
-    @NotBlank(message = "O atributo é obrigatorio")
-    @Size(min = 5, max = 255)
-    private String descricao;
-    
-    @OneToMany(mappedBy ="categoria", cascade = CascadeType.ALL )
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+
+	@NotBlank(message = "O atributo é obrigatorio")
+	@Size(min = 5, max = 255)
+	private String tipoProduto;
+
+	@NotBlank(message = "O atributo é obrigatorio")
+	@Size(min = 5, max = 255)
+	private String descricao;
+
+	@OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL)
 	@JsonIgnoreProperties("categoria")
-	private List<ProdutoModels> produto; 
-    
-    public String getDescricao() {
+	private List<ProdutoModels> produto;
+
+	public CategoriaModels(Long id, String tipoProduto, String descricao) {
+		this.id = id;
+		this.tipoProduto = tipoProduto;
+		this.descricao = descricao;
+	}
+
+	public CategoriaModels() {
+	}
+
+	public String getDescricao() {
 		return descricao;
 	}
 
@@ -42,21 +51,21 @@ public class CategoriaModels {
 		this.descricao = descricao;
 	}
 
-    public Long getId() {
-        return id;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public String getTipoProduto() {
-        return tipoProduto;
-    }
+	public String getTipoProduto() {
+		return tipoProduto;
+	}
 
-    public void setTipoProduto(String tipoProduto) {
-        this.tipoProduto = tipoProduto;
-    }
+	public void setTipoProduto(String tipoProduto) {
+		this.tipoProduto = tipoProduto;
+	}
 
 	public List<ProdutoModels> getProduto() {
 		return produto;
@@ -66,5 +75,4 @@ public class CategoriaModels {
 		this.produto = produto;
 	}
 
-    
 }
